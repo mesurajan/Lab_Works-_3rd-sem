@@ -1,3 +1,4 @@
+// Fixed point
 #include <stdio.h>
 #include <math.h>
 #define error 0.00001
