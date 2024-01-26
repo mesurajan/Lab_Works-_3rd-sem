@@ -1,4 +1,5 @@
 #include <graphics.h>
+#include <conio.h>
 #include <stdio.h>
 void drawEllipse(int, int, int, int);
 int main()
@@ -13,7 +14,6 @@ int main()
     x = 0;
     y = ry;
     drawEllipse(x, y, xc, yc);
-    delay(5);
 
     p = (ry * ry) - (rx * rx * ry) + (rx * rx * (1 / 4));
     while ((2 * ry * ry * x) < (2 * rx * rx * y))
@@ -26,7 +26,6 @@ int main()
             y = y;
             p = p + (2 * ry * ry * x) + (ry * ry);
             drawEllipse(x, y, xc, yc);
-            delay(5);
         }
         else
         {
@@ -34,7 +33,6 @@ int main()
             y = y - 1;
             p = p + (2 * ry * ry * x) + (ry * ry) - (2 * rx * rx * y);
             drawEllipse(x, y, xc, yc);
-            delay(5);
         }
     }
     p1 = (ry * ry) * ((float)(x + 0.5)) * ((float)(x + 0.5)) + (rx * rx) * (y - 1) * (y - 1) - (rx * rx * ry * ry);
@@ -47,7 +45,6 @@ int main()
             y = y - 1;
             p1 = p1 - (2 * rx * rx * y) + (rx * rx * y);
             drawEllipse(x, y, xc, yc);
-            delay(5);
         }
 
         else
@@ -57,7 +54,6 @@ int main()
 
             p1 = p1 + (2 * ry * ry * x) - (2 * rx * rx * y) + (rx * rx);
             drawEllipse(x, y, xc, yc);
-            delay(5);
         }
     }
 
