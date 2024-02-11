@@ -1,0 +1,1 @@
+// implementation of simphons 3/8 rule
