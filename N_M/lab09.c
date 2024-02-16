@@ -1,86 +1,60 @@
 // Guass jordan method
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
-#include <conio.h>
 
-void swap_rows(double a[][100], int i, int j, int n)
-{
-    double temp;
-    for (int k = 0; k < n; k++)
-    {
-        temp = a[i][k];
-        a[i][k] = a[j][k];
-        a[j][k] = temp;
-    }
-}
-
-void guass_jordan(double a[][100], int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i][i] == 0)
-
-        {
-            for (int j = i + 1; j < n; j++)
-            {
-                if (a[j][i] != 0)
-                {
-                    swap_rows(a, i, j, n);
-                    break;
-                }
-            }
-        }
-
-        for (int j = i + 1; j < n; j++)
-        {
-            double ratio = a[j][i] / a[i][i];
-            for (int k = 0; k < n + 1; k++)
-            {
-                a[j][k] = a[j][k] - ratio * a[i][k];
-            }
-        }
-    }
-}
+#define MAX 10
 
 int main()
 {
-    int n, i, j, k;
-
-    printf("Enter the order of the matrix: ");
+    int i, j, k, n, pivrow;
+    float a[MAX][MAX], b[MAX], large, temp, factor, pivot;
+    printf("Input the number of variables: ");
     scanf("%d", &n);
-
-    double a[100][100];
-    double x[100];
-
-    printf("Enter the augmented matrix coefficients:\n");
-    for (i = 0; i < n; i++)
+    printf("Input coefficients a(i,j) row-wise (one row at a line): ");
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= n; j++)
+            scanf("%f", &a[i][j]);
+    printf("Enter vector b:");
+    for (i = 1; i <= n; i++)
+        scanf("%f", &b[i]);
+    for (i = 1; i <= n; i++)
     {
-        for (j = 0; j < n + 1; j++)
+        pivrow = i;
+        large = a[i][i];
+        for (k = i + 1; k <= n; k++)
+            if (fabs(a[k][i]) > large)
+            {
+                large = a[k][i];
+                pivrow = k;
+            }
+        for (j = i; j <= n; j++)
         {
-            scanf("%lf", &a[i][j]);
+            temp = a[pivrow][j];
+            a[pivrow][j] = a[i][j];
+            a[i][j] = temp;
+        }
+        temp = b[pivrow];
+        b[pivrow] = b[i];
+        b[i] = temp;
+        pivot = a[i][i];
+    }
+    for (i = 1; i <= n; i++)
+    {
+        factor = 1 / pivot;
+        for (j = 1; j <= n; j++)
+            a[i][j] *= factor;
+        b[i] *= factor;
+        pivot = a[i][i + 1];
+        for (j = i + 1; j <= n; j++)
+        {
+            factor = a[j][i];
+            for (k = 1; k <= n; k++)
+                a[j][k] -= factor * a[i][k];
+            b[j] -= factor * b[i];
         }
     }
-
-    guass_jordan(a, n);
-
-    x[n - 1] = a[n - 1][n] / a[n - 1][n - 1];
-
-    for (i = n - 2; i >= 0; i--)
-    {
-        double sum = 0;
-        for (j = i + 1; j < n; j++)
-        {
-            sum += a[i][j] * x[j];
-        }
-        x[i] = (a[i][n] - sum) / a[i][i];
-    }
-
-    printf("Solution for the system of equations:\n");
-    for (i = 0; i < n; i++)
-    {
-        printf("x[%d] = %.4lf\n", i + 1, x[i]);
-    }
-
+    printf("Solution:\n");
+    for (i = 1; i <= n; i++)
+        printf("x%d = %f\n", i, b[i]);
     return 0;
 }
