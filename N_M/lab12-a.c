@@ -1,4 +1,4 @@
-// curve fitting using least square method
+// curve fitting using least square method i.e y=a+bx
 #include <stdio.h>
 
 int main()
