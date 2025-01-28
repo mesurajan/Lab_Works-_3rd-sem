@@ -2,7 +2,7 @@
 #define n 5
 int main()
 {
-    int c, rear = -1, front = -1, new_data, temp, i, myqueue[n];
+    int c, rear = -1, front = 0, new_data, temp, i, myqueue[n];
     do
     {
         printf("\nMenu\n1.Enque\n2.DEque\n3.Display\n4.Exit\nEnter your choice\n");
@@ -11,24 +11,24 @@ int main()
         switch (c)
         {
         case 1:
-            if (rear == n - 2)
+            if (rear == n - 1)
             {
                 printf("queue overflow");
             }
 
             else if (rear == -1)
             {
-                printf("Enter the element you want to push  in queue:\n");
-                scanf("%d", new_data);
                 front = 0;
                 rear = 0;
+                printf("Enter the element you want to push  in queue:\n");
+                scanf("%d", &new_data);
                 myqueue[rear] = new_data;
             }
             else
             {
-                printf("Enter the datat to be pushed ");
-                scanf("%d", new_data);
                 rear++;
+                printf("Enter the datat to be pushed ");
+                scanf("%d", &new_data);
                 myqueue[rear] = new_data;
             }
             break;
@@ -41,15 +41,15 @@ int main()
             }
             else if (front == rear)
             {
-                temp = myqueue[front];
                 front = -1;
                 rear = -1;
+                temp = myqueue[front];
                 printf("deleted element is:%d ", temp);
             }
             else
             {
-                temp = myqueue[front];
                 front++;
+                temp = myqueue[front];
                 printf("Deleted element is :%d", temp);
             }
             break;

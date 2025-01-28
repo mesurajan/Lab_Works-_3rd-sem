@@ -14,7 +14,7 @@ int main()
         switch (c)
         {
         case 1:
-            if (rear == n - 2)
+            if (rear == n - 1)
             {
                 printf("\nQueue overflow\n");
             }

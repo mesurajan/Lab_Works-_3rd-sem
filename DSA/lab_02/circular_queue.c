@@ -1,10 +1,10 @@
 // Implementation of circular queue
 #include <stdio.h>
 #include <conio.h>
-#define max 5
+#define n 5
 int main()
 {
-    int c, rear = -1, front = -1, new_data, myqueue[max], temp, front_temp, rear_temp, i;
+    int c, rear = -1, front = -1, new_data, myqueue[n], temp, front_temp, rear_temp, i;
     do
     {
         printf("\nMENU\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit:\n Enter the task you want to perform\n");
@@ -12,7 +12,7 @@ int main()
         switch (c)
         {
         case 1:
-            if ((front == 0 && rear == max - 1) || (front == (rear + 1) % max))
+            if ((front == 0 && rear == n - 1) || (front == (rear + 1) % n))
             {
                 printf("Queue Overflow........\n");
                 break;
@@ -27,14 +27,14 @@ int main()
             }
             else
             {
-                rear = (rear + 1) % max;
+                rear = (rear + 1) % n;
                 printf("Enter the number you want to enqueue:\n");
                 scanf("%d", &new_data);
                 myqueue[rear] = new_data;
             }
             break;
         case 2:
-            if (front == -1 && rear == -1)
+            if (front = -1 && rear == -1)
             {
                 printf("Queue Underflow..........\n");
                 break;
@@ -49,7 +49,7 @@ int main()
             else
             {
                 temp = myqueue[front];
-                front = (front + 1) % max;
+                front = (front + 1) % n;
                 printf("The deleted data is %d\n", temp);
             }
             break;
@@ -68,7 +68,7 @@ int main()
                 }
                 else
                 {
-                    for (i = front_temp; i < max; i++)
+                    for (i = front_temp; i < n; i++)
                     {
                         printf("%d\t", myqueue[i]);
                     }
